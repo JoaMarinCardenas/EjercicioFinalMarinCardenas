@@ -13,9 +13,9 @@ public class ControlVuelos {
     public void agregarItinerario(Itinerario itinerario) throws Exception {
         // Verificar si el piloto está disponible y no hay traslapes de horario
         for (Itinerario existente : itinerarios) {
-            if (existente.piloto == itinerario.piloto) {
+            if (existente.getPiloto() == itinerario.getPiloto()) {
                 if (existente.verificarTraslape(itinerario)) {
-                    throw new Exception("El piloto " + itinerario.piloto.getNombre() + " tiene un traslape de horario.");
+                    throw new Exception("El piloto " + itinerario.getPiloto().getNombre() + " tiene un traslape de horario.");
                 }
             }
         }
@@ -30,11 +30,11 @@ public class ControlVuelos {
         System.out.println("=================================================== ");
         System.out.println("Ingrese la cantidad de itinerarios que desea crear: ");
         int cantidadItinerarios = scanner.nextInt();
-        scanner.nextLine(); // Limpiar el buffer de entrada
+        scanner.nextLine();
 
         for (int i = 0; i < cantidadItinerarios; i++) {
             System.out.println("=================================================== ");
-            System.out.println("Itinerario #" + (i + 1));
+            System.out.println("Itinerario " + (i + 1));
             System.out.print("Ingrese la ciudad de origen: ");
             String origen = scanner.nextLine();
 
@@ -43,11 +43,11 @@ public class ControlVuelos {
 
             System.out.print("Ingrese la hora de inicio: ");
             int horaInicio = scanner.nextInt();
-            scanner.nextLine(); // Limpiar el buffer de entrada
+            scanner.nextLine();
 
             System.out.print("Ingrese la hora de fin: ");
             int horaFin = scanner.nextInt();
-            scanner.nextLine(); // Limpiar el buffer de entrada
+            scanner.nextLine();
 
             System.out.print("Ingrese el nombre del avión: ");
             String nombreAvion = scanner.nextLine();
@@ -59,7 +59,7 @@ public class ControlVuelos {
 
             Itinerario itinerario = new Itinerario(origen, destino, horaInicio, horaFin);
             itinerario.asignarAvion(avion);
-            itinerario.asignarPiloto(piloto);
+            itinerario.setPiloto(piloto);
 
             try {
                 control.agregarItinerario(itinerario);
